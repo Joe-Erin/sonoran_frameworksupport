@@ -294,7 +294,7 @@ if pluginConfig.enabled then
                                 xPlayer.Functions.RemoveMoney('bank', citation.fine)
                                 if pluginConfig.fineNotify then
                                     debugLog("sending fine notification")
-                                    local finemessage = PlayerData.name() .. ' has been issued a fine of $' .. citation.fine
+                                    local finemessage = xPlayer.PlayerData.charinfo.name .. ' has been issued a fine of $' .. citation.fine
                                     if citation.issuer ~= '' then finemessage = finemessage .. ' by ' .. citation.issuer end
                                     TriggerClientEvent('chat:addMessage', -1, {color = { 255, 0, 0 }, multiline = true, args = { finemessage }})
                                 end
