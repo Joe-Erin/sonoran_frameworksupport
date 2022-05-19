@@ -9,7 +9,10 @@
 CreateThread(function() Config.LoadPlugin("frameworksupport", function(pluginConfig)
 
 if pluginConfig.enabled then
-    local QBCore = exports['qb-core']:GetCoreObject()
+    local QBCore = nil
+    if pluginConfig.usingQBCore then
+	QBCore = exports['qb-core']:GetCoreObject()		
+    end
     TriggerEvent("esx:getSharedObject", function(obj) ESX = obj end)
     JobCache = {}
 
@@ -294,7 +297,7 @@ if pluginConfig.enabled then
                                 xPlayer.Functions.RemoveMoney('bank', citation.fine)
                                 if pluginConfig.fineNotify then
                                     debugLog("sending fine notification")
-                                    local finemessage = xPlayer.PlayerData.charinfo.name .. ' has been issued a fine of $' .. citation.fine
+                                    local finemessage = xPlayer.PlayerData.charinfo.lastname .. ' has been issued a fine of $' .. citation.fine
                                     if citation.issuer ~= '' then finemessage = finemessage .. ' by ' .. citation.issuer end
                                     TriggerClientEvent('chat:addMessage', -1, {color = { 255, 0, 0 }, multiline = true, args = { finemessage }})
                                 end
